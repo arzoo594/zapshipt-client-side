@@ -66,6 +66,13 @@ const Navbar = () => {
             <li>
               <NavLink to="/rider">Be a Rider</NavLink>
             </li>
+            {user && (
+              <>
+                <li>
+                  <NavLink to="/dasboard/my-parcels">My Parcels</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">
@@ -89,6 +96,13 @@ const Navbar = () => {
           <li>
             <NavLink to="/be-a-rider">Be a Rider</NavLink>
           </li>
+          {user && (
+            <>
+              <li>
+                <NavLink to="/dasboard/my-parcels">My Parcels</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className="navbar-end gap-1">
