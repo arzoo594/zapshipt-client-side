@@ -7,6 +7,7 @@ import SocialLogin from "./SocialLogin";
 import axios from "axios";
 import { signOut } from "firebase/auth";
 import { auth } from "../FireBase/firebase.config";
+import UseAxiosSecure from "../Hooks/UseAxiosSecure";
 
 const Register = () => {
   const {
@@ -19,6 +20,7 @@ const Register = () => {
   const { registerUser, updateProfileFunc } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = UseAxiosSecure();
 
   const handleRegisterSubmit = (data) => {
     console.log("after register", data.photo[0]);
@@ -33,11 +35,24 @@ const Register = () => {
         }`;
         axios.post(image_Api_Url, formData).then((res) => {
           console.log(res.data.data.url);
+          const photoURL = res.data.data.url;
           // update profile
           const updateProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: photoURL,
           };
+          // for user collection create
+          const userInfo = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+            email: data.email,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created in the database");
+            }
+          });
+
           updateProfileFunc(updateProfile)
             .then(() => {
               signOut(auth);

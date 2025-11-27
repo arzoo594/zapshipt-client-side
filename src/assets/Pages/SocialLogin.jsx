@@ -1,17 +1,28 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import UseAxiosSecure from "../Hooks/UseAxiosSecure";
 
 const SocialLogin = () => {
   const { googleSingInFunc } = useContext(AuthContext);
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = UseAxiosSecure();
   const handleGoogleSignIn = () => {
     googleSingInFunc()
       .then((res) => {
         console.log(res.user);
-        navigate(location.state || "/");
+
+        const userInfo = {
+          displayName: res.user.displayName,
+          photoURL: res.user.photoURL,
+          email: res.user.email,
+        };
+        axiosSecure.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          navigate(location.state || "/");
+        });
 
         Swal.fire({
           icon: "success",

@@ -7,7 +7,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
-import Rider from "../Pages/Rider";
+
 import SendParcel from "../Pages/SendParcel";
 import AboutUs from "../Pages/AboutUs";
 import DashBoardLayout from "../Layouts/DashBoardLayout";
@@ -15,6 +15,10 @@ import MyParcels from "../Pages/DasBoard/MyParcels";
 import Payment from "../Pages/DasBoard/Payment";
 import PaymentSyccess from "../Pages/DasBoard/PaymentSyccess";
 import PaymentCancel from "../Pages/DasBoard/PaymentCancel";
+import PaymentsHistory from "../Pages/DasBoard/PaymentsHistory";
+import BeARider from "../Pages/BeARider";
+import ApprovedRiders from "../Pages/DasBoard/ApprovedRiders";
+import UsersManagment from "../Pages/DasBoard/UsersManagment";
 
 export const router = createBrowserRouter([
   {
@@ -36,9 +40,10 @@ export const router = createBrowserRouter([
       },
       {
         path: "/be-a-rider",
+        loader: () => fetch("/servicesZone.json").then((res) => res.json()),
         element: (
           <PrivateRoute>
-            <Rider></Rider>
+            <BeARider />
           </PrivateRoute>
         ),
       },
@@ -96,6 +101,18 @@ export const router = createBrowserRouter([
         path: "payment-cancelled",
         Component: PaymentCancel,
       },
+      {
+        path: "payments-history",
+        element: <PaymentsHistory></PaymentsHistory>,
+      },
+      {
+        path: "approved-riders",
+        element: <ApprovedRiders></ApprovedRiders>,
+      },
+      {
+        path:"users-management",
+        Component:UsersManagment
+      }
     ],
   },
 ]);

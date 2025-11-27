@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
 import Logo from "../Components/Logo";
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbCreditCard, TbMotorbike, TbTruckDelivery,TbUsers } from "react-icons/tb";
 const DashBoardLayout = () => {
   return (
     <div className="drawer lg:drawer-open">
@@ -81,12 +81,42 @@ const DashBoardLayout = () => {
             </li>
             <li>
               <Link
-                to=""
+                to="/dasboard/my-parcels"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="My Parcels"
               >
                 <TbTruckDelivery className="my-1.5 inline-block size-4" />
                 <span className="is-drawer-close:hidden">My Parcels</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dasboard/payments-history"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="My Payments"
+              >
+                <TbCreditCard className="my-1.5 inline-block size-4" />
+                <span className="is-drawer-close:hidden">My Payments</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dasboard/approved-riders"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Approved Riders"
+              >
+                <TbMotorbike className="my-1.5 inline-block size-4" />
+                <span className="is-drawer-close:hidden">Approved Rider</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dasboard/users-management"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Users-Management"
+              >
+                <TbUsers className="my-1.5 inline-block size-4" />
+                <span className="is-drawer-close:hidden">Users Managment</span>
               </Link>
             </li>
 
